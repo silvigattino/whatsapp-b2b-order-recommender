@@ -1,18 +1,19 @@
-# WhatsApp B2C Order Recommender
+# WhatsApp B2B Order Recommender
 
-**B2C Order Generation Platform via Instant Messaging and Intelligent Automation**  
+**B2B Order Generation Platform via Instant Messaging and Intelligent Automation**  
 Master's Thesis (TFM) — Master's Degree in Artificial Intelligence, Universidad Internacional de La Rioja (UNIR)
 
 - **Author:** Silvina Nora Gattino
 - **Thesis director:** Carlos Manuel Moreno Negrin
 - **Type:** Experimental pilot · June 2026
 - **Full thesis (PDF, in Spanish):** [`Silvina_Nora_Gattino_Deposito_Ordinaria.pdf`](Silvina_Nora_Gattino_Deposito_Ordinaria.pdf)
+- **Defense presentation (PDF, in Spanish):** [`TFM_Presentacion_v4.pdf`](TFM_Presentacion_v4.pdf)
 
 ---
 
 ## 1. Overview
 
-Many wholesale (B2B/B2C) businesses receive customer orders as free-text messages over WhatsApp, which staff must then read, interpret and re-type into the management system. This project proposes an AI-based pipeline that:
+Many wholesale (B2B) businesses receive customer orders as free-text messages over WhatsApp, which staff must then read, interpret and re-type into the management system. This project proposes an AI-based pipeline that:
 
 1. **Interprets** a natural-language product request (e.g. *"pasta dental infantil"* — kids' toothpaste),
 2. **Recommends** the best-matching products (and alternatives) from a structured catalog, and
@@ -124,14 +125,15 @@ Macro-average over 6 test queries (top-5 results vs. manual ground truth):
 ## 5. Repository structure
 
 ```
-whatsapp-b2c-order-recommender/
+whatsapp-b2b-order-recommender/
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
 ├── Main.ipynb                       # Supervised hybrid recommender (NLP + RapidFuzz + TF-IDF + K-NN)
 ├── Main_NS.ipynb                    # Unsupervised complementary recommender (Hierarchical + K-Modes)
 ├── Figures/                         # Pipeline diagrams and figures extracted from the notebook outputs
-└── Silvina_Nora_Gattino_Deposito_Ordinaria.pdf   # Full thesis (Spanish)
+├── Silvina_Nora_Gattino_Deposito_Ordinaria.pdf   # Full thesis (Spanish)
+└── TFM_Presentacion_v4.pdf                       # Defense presentation (Spanish)
 ```
 
 ## 6. How to run
@@ -152,4 +154,4 @@ Python · pandas · NumPy · scikit-learn · RapidFuzz · kmodes · SciPy · Mat
 
 ## 8. Citation
 
-> Gattino, S. N. (2026). *B2C Order Generation Platform via Instant Messaging and Intelligent Automation* [Master's thesis, Universidad Internacional de La Rioja]. Director: C. M. Moreno Negrin.
+> Gattino, S. N. (2026). *B2B Order Generation Platform via Instant Messaging and Intelligent Automation* [Master's thesis, Universidad Internacional de La Rioja]. Director: C. M. Moreno Negrin.
