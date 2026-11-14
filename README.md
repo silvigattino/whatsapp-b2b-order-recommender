@@ -5,7 +5,7 @@ Master's Thesis (TFM) — Master's Degree in Artificial Intelligence, Universida
 
 - **Author:** Silvina Nora Gattino
 - **Thesis director:** Carlos Manuel Moreno Negrin
-- **Type:** Experimental pilot · September 2026
+- **Type:** Experimental pilot · June 2026
 - **Full thesis (PDF, in Spanish):** [`Silvina_Nora_Gattino_Deposito_Ordinaria.pdf`](Silvina_Nora_Gattino_Deposito_Ordinaria.pdf)
 
 ---
