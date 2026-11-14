@@ -1,0 +1,17 @@
+# Data (never commit datasets)
+*.csv
+*.txt
+!requirements.txt
+data/
+
+# Python / notebooks
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+*.pyc
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
