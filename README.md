@@ -1,6 +1,6 @@
 # WhatsApp B2C Order Recommender
 
-**B2C Order Generation Platform via Instant Messaging and Intelligent Automation**
+**B2C Order Generation Platform via Instant Messaging and Intelligent Automation**  
 Master's Thesis (TFM) — Master's Degree in Artificial Intelligence, Universidad Internacional de La Rioja (UNIR)
 
 - **Author:** Silvina Nora Gattino
@@ -26,27 +26,26 @@ The repository contains the two experimental notebooks of the thesis: a **superv
 
 ## 2. Architecture
 
-```
-Natural-language query (WhatsApp)
-        │
-        ▼
-1. Preprocessing & normalization ── accents/symbols cleanup · synonym dictionary
-        │
-        ▼
-2. Category detection ── RapidFuzz (partial_ratio ≥ 75%)  ──fallback──▶  TF-IDF cosine (≥ 0.40)
-        │
-        ▼
-3. Semantic scoring ── Query Score (SC) + Attribute Score (SA)  →  Semantic Score SS = 0.70·SC + 0.30·SA
-        │
-        ▼
-4. Structural K-NN ── One-Hot Encoding + cosine similarity  →  ScoreKNN
-        │
-        ▼
-5. Hybrid weighted fusion ── S_H = α·KNN_n + β·SC_n + γ·SA_n  (scenarios A / B / C)
-        │
-        ▼
-Top-5 recommended products   +   complementary products (clustering on sales history)
-```
+### 2.1 System overview
+
+![System overview](Figures/12_system_overview.png)
+*Figure 1 of the thesis. Proposed operation of the intelligent order management and optimization system.*
+
+A customer sends an order as a free-text WhatsApp message. The system (1) **interprets** the message with NLP, (2) runs a **commercial validation** (customer, prices, stock, credit), and then (3) works with two complementary models in parallel: the **supervised hybrid recommender**, which proposes substitute products, and the **unsupervised model**, which suggests complementary products from purchase history. (4) The proposals are used to **optimize the order**, and (5) the final order is **generated in the company's management system**. This repository implements the two recommendation models (blue and orange boxes).
+
+### 2.2 Supervised hybrid recommender
+
+![Hybrid model pipeline](Figures/13_hybrid_model_pipeline.png)
+*Figure 5 of the thesis. Conceptual pipeline of the hybrid product recommendation model.*
+
+The query is first cleaned and normalized (synonyms, attribute extraction). It is then scored by **semantic scoring** (TF-IDF, query score and attribute score) and, independently, by a **structural K-NN** over one-hot encoded attributes. The three normalized scores are combined in a **weighted hybrid fusion** (`S_H = α·S_KNN + β·S_C + γ·S_A`), whose weights are varied in scenarios A, B and C, and the system returns the **top-5 products**. Combining both views overcomes the weakness of each one alone: semantic scoring depends on the quality of the product text, while structural K-NN ignores the user's natural vocabulary. Implemented in `Main.ipynb`.
+
+### 2.3 Unsupervised complementary recommender
+
+![Unsupervised model pipeline](Figures/14_unsupervised_model_pipeline.png)
+*Figure 6 of the thesis. Pipeline of the unsupervised model for complementary products.*
+
+Starting from six months of sales, the best-selling products are chosen as targets and a purchase dataset (frequency and normalized average price) is built. Co-purchased products are split into two groups: **same category** (similar products), handled with hierarchical clustering to choose K, then K-Modes on subcategory and brand, validated with Silhouette, Davies-Bouldin and Calinski-Harabasz and reduced to the top-2 per cluster; and **other categories** (diverse products), handled with a direct purchase-frequency analysis (top-3 per subcategory and brand) because clustering is not discriminative on such heterogeneous items. Implemented in `Main_NS.ipynb`.
 
 ## 3. Methodology
 
@@ -131,7 +130,7 @@ whatsapp-b2c-order-recommender/
 ├── .gitignore
 ├── Main.ipynb                       # Supervised hybrid recommender (NLP + RapidFuzz + TF-IDF + K-NN)
 ├── Main_NS.ipynb                    # Unsupervised complementary recommender (Hierarchical + K-Modes)
-├── Figures/                         # Figures extracted from the notebook outputs
+├── Figures/                         # Pipeline diagrams and figures extracted from the notebook outputs
 └── Silvina_Nora_Gattino_Deposito_Ordinaria.pdf   # Full thesis (Spanish)
 ```
 
